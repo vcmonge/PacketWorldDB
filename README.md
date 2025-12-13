@@ -9,4 +9,4 @@
 
 ## 2. Importación de la base de datos
 - Crear base de datos con el nombre `packetworld`
-- Importar base de datos `export.sql`
+- Importar base de datos `export.sql` a `packetworld`
