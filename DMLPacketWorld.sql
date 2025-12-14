@@ -78,21 +78,21 @@ INSERT INTO ENVIO (
     destinatarioNombre, 
     destinatarioApellidoPaterno, 
     destinatarioApellidoMaterno, 
+    numeroDestino,
+    calleDestino,
+    idColoniaDestino,
     idEstatusEnvio, 
     idSucursalOrigen, 
-    idConductor, 
-    idCliente, 
-    idDireccionDestino
+    idConductor,
+    idCliente
 ) VALUES
-    -- Envío 1: De Ana para Empresa Tecnológica (Guadalajara)
-    ('GUIA-00001', 350.50, 'Empresa Tecnológica S.A.', NULL, NULL, 3, 1, 3, 1, 5),
-    
-    -- Envío 2: De Carlos para Roberto Gómez (Xalapa)
-    ('GUIA-00002', 120.00, 'Roberto', 'Gómez', 'Bolaños', 1, 1, NULL, 2, 6);
+    ('GUIA-00002', 120.00, 'Roberto', 'Gómez', 'Bolaños', 'Int. 32', 'Salinas', 10012, 2, 1, 3, 1),
+    ('GUIA-00001', 0.00, 'Víctor', 'Monge', 'Morales', '28', 'Nicolas', 10011, 1, 1, 4, 1);
 
 -- 2.12 Paquetes
 INSERT INTO PAQUETE (idEnvio, descripcion, peso, alto, ancho, profundidad) VALUES
     (1, 'Caja con componentes electrónicos', 2.5, 30.0, 20.0, 15.0),
+    (1, 'Caja', 2.5, 30.0, 20.0, 15.0),
     (2, 'Sobre con documentos legales', 0.2, 1.0, 25.0, 35.0);
 
 -- 2.13 Historial de Estatus

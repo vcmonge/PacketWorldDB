@@ -160,19 +160,22 @@ CREATE TABLE ENVIO (
     idEnvio INT PRIMARY KEY AUTO_INCREMENT,
     noGuia VARCHAR(50) NOT NULL UNIQUE,
     costo DECIMAL(10, 2) NOT NULL,
+
     destinatarioNombre VARCHAR(100) NOT NULL,
     destinatarioApellidoPaterno VARCHAR(100),
     destinatarioApellidoMaterno VARCHAR(100),
+    numeroDestino VARCHAR(20),
+    calleDestino VARCHAR(100) NOT NULL,
+    idColoniaDestino INT NOT NULL,
+
     idEstatusEnvio INT NOT NULL,
     idSucursalOrigen INT NOT NULL,
     idConductor INT,
     idCliente INT NOT NULL,
-    idDireccionDestino INT NOT NULL,
     FOREIGN KEY (idCliente) REFERENCES CLIENTE(idCliente),
     FOREIGN KEY (idSucursalOrigen) REFERENCES SUCURSAL(idSucursal),
     FOREIGN KEY (idConductor) REFERENCES CONDUCTOR(idConductor),
-    FOREIGN KEY (idEstatusEnvio) REFERENCES ESTATUS_ENVIO(idEstatusEnvio),
-    FOREIGN KEY (idDireccionDestino) REFERENCES DIRECCION(idDireccion)
+    FOREIGN KEY (idEstatusEnvio) REFERENCES ESTATUS_ENVIO(idEstatusEnvio)
 );
 
 -- Tabla de paquetes
