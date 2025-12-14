@@ -1,4 +1,4 @@
-# Dos opciones para importarla la BD
+# Dos opciones para importar la BD
 
 ### A) Importación de la base de datos
 1. Crear base de datos con el nombre `packetworld`
