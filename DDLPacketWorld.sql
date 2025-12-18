@@ -159,14 +159,12 @@ CREATE TABLE UNIDAD_BAJA (
 CREATE TABLE ENVIO (
     idEnvio INT PRIMARY KEY AUTO_INCREMENT,
     noGuia VARCHAR(50) NOT NULL UNIQUE,
-    costo DECIMAL(10, 2) NOT NULL,
+    costo DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
 
     destinatarioNombre VARCHAR(100) NOT NULL,
     destinatarioApellidoPaterno VARCHAR(100),
     destinatarioApellidoMaterno VARCHAR(100),
-    numeroDestino VARCHAR(20),
-    calleDestino VARCHAR(100) NOT NULL,
-    idColoniaDestino INT NOT NULL,
+    destinatarioIdDireccion INT NOT NULL,
 
     idEstatusEnvio INT NOT NULL,
     idSucursalOrigen INT NOT NULL,
@@ -175,7 +173,8 @@ CREATE TABLE ENVIO (
     FOREIGN KEY (idCliente) REFERENCES CLIENTE(idCliente),
     FOREIGN KEY (idSucursalOrigen) REFERENCES SUCURSAL(idSucursal),
     FOREIGN KEY (idConductor) REFERENCES CONDUCTOR(idConductor),
-    FOREIGN KEY (idEstatusEnvio) REFERENCES ESTATUS_ENVIO(idEstatusEnvio)
+    FOREIGN KEY (idEstatusEnvio) REFERENCES ESTATUS_ENVIO(idEstatusEnvio),
+    FOREIGN KEY (destinatarioIdDireccion) REFERENCES DIRECCION(idDireccion)
 );
 
 -- Tabla de paquetes

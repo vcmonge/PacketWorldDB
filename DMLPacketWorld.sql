@@ -21,19 +21,13 @@ INSERT INTO TIPO_UNIDAD (tipo) VALUES
     ('Híbrida');
 
 -- 2.3 Direcciones
--- Asumimos que los IDs de COLONIAS 1-5 existen (ya sea por carga externa o manual)
 INSERT INTO DIRECCION (calle, numero, idColonia) VALUES
-    -- Direcciones de SUCURSALES
     ('Calle Enríquez', '12', 10011),
     ('Av. Álvaro Obregón', '45', 10012),
-    
-    -- Direcciones de CLIENTES
     ('Calle Araucarias', '105', 10013),
     ('Calle Martí', '200', 10014),
-    
-    -- Direcciones de DESTINOS
-    ('Calle Vallarta', '505', 10015),
-    ('Calle Madero', '1', 10016);
+    ('Salinas', 'Int. 32', 10012),
+    ('Nicolas', '28', 10011);
 
 -- 2.4 Sucursales
 INSERT INTO SUCURSAL (codigo, nombre, idDireccion) VALUES
@@ -67,27 +61,21 @@ INSERT INTO CLIENTE (nombre, apellidoPaterno, apellidoMaterno, telefono, correo,
     ('Ana', 'Torres', 'Méndez', '2281234567', 'ana.cliente@gmail.com', 3),
     ('Carlos', 'Ruiz', 'Zafón', '2299876543', 'carlos.cliente@hotmail.com', 4);
 
--- 2.10 Destinatarios (TABLA ELIMINADA - SE SALTA ESTE PASO)
--- Los datos se insertarán directamente en la tabla ENVIO
-
 -- 2.11 Envíos
--- CAMBIOS: Se eliminó idDestinatario. Se agregaron campos de nombre/apellidos del destinatario.
 INSERT INTO ENVIO (
     noGuia, 
     costo, 
     destinatarioNombre, 
     destinatarioApellidoPaterno, 
     destinatarioApellidoMaterno, 
-    numeroDestino,
-    calleDestino,
-    idColoniaDestino,
+    destinatarioIdDireccion,
     idEstatusEnvio, 
     idSucursalOrigen, 
     idConductor,
     idCliente
 ) VALUES
-    ('GUIA-00002', 120.00, 'Roberto', 'Gómez', 'Bolaños', 'Int. 32', 'Salinas', 10012, 2, 1, 3, 1),
-    ('GUIA-00001', 0.00, 'Víctor', 'Monge', 'Morales', '28', 'Nicolas', 10011, 1, 1, 4, 1);
+    ('GUIA-00002', 120.00, 'Roberto', 'Gómez', 'Bolaños', 5, 2, 1, 3, 1),
+    ('GUIA-00001', 0.00, 'Víctor', 'Monge', 'Morales', 6, 1, 1, 4, 1);
 
 -- 2.12 Paquetes
 INSERT INTO PAQUETE (idEnvio, descripcion, peso, alto, ancho, profundidad) VALUES
@@ -96,7 +84,6 @@ INSERT INTO PAQUETE (idEnvio, descripcion, peso, alto, ancho, profundidad) VALUE
     (2, 'Sobre con documentos legales', 0.2, 1.0, 25.0, 35.0);
 
 -- 2.13 Historial de Estatus
--- CAMBIOS: Se agrega explícitamente la columna comentario (puede ser NULL)
 INSERT INTO ENVIO_HISTORIAL_ESTATUS (idEnvio, idColaborador, idEstatusEnvio, fechaHora, comentario) VALUES
     (1, 2, 1, '2023-10-01 09:00:00', 'Paquete recibido en ventanilla sin daños'),
     (1, 1, 2, '2023-10-01 10:00:00', 'Documentación validada'),
