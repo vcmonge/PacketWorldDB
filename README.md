@@ -20,3 +20,15 @@ FLUSH PRIVILEGES;
 3. Importar base de datos `mexico.sql` a `packetworld`
 4. Ejecutar el script `DDLPacketWorld.sql` a partir de la línea `13`
 5. Ejecutar el script `DMLPacketWorld.sql`
+
+## Credenciales de prueba
+
+### Escritorio
+
+Usuario: `PW001` 
+Contraseña: `admin123`
+
+### Móvil
+
+Usuario: `PW003` 
+Constraseña: `drive123`
