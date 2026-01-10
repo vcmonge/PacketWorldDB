@@ -102,9 +102,9 @@ CREATE TABLE COLABORADOR (
 
 -- Tabla separada para conductores
 CREATE TABLE CONDUCTOR (
-    idConductor INT PRIMARY KEY, -- TODO: revisar si hacer el id separado
+    idConductor INT PRIMARY KEY,
     numero_licencia VARCHAR(50) NOT NULL,
-    FOREIGN KEY (idConductor) REFERENCES COLABORADOR(idColaborador)
+    FOREIGN KEY (idConductor) REFERENCES COLABORADOR(idColaborador) ON DELETE CASCADE
 );
 
 -- Tabla para los clientes
@@ -137,7 +137,7 @@ CREATE TABLE UNIDAD_CONDUCTOR (
     idUnidad INT PRIMARY KEY,
     idConductor INT UNIQUE NOT NULL,
     FOREIGN KEY (idUnidad) REFERENCES UNIDAD(idUnidad),
-    FOREIGN KEY (idConductor) REFERENCES CONDUCTOR(idConductor)
+    FOREIGN KEY (idConductor) REFERENCES CONDUCTOR(idConductor) ON DELETE CASCADE
 );
 
 -- Tabla para bajas de unidades
@@ -146,9 +146,9 @@ CREATE TABLE UNIDAD_BAJA (
     idUnidad INT NOT NULL,
     motivoBaja TEXT NOT NULL,
     fechaBaja TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    idColaborador INT NOT NULL,
+    idColaborador INT,
     FOREIGN KEY (idUnidad) REFERENCES UNIDAD(idUnidad),
-    FOREIGN KEY (idColaborador) REFERENCES COLABORADOR(idColaborador)
+    FOREIGN KEY (idColaborador) REFERENCES COLABORADOR(idColaborador) ON DELETE SET NULL
 );
 
 -- ----------------------------------------------------------------------------
@@ -170,9 +170,9 @@ CREATE TABLE ENVIO (
     idSucursalOrigen INT NOT NULL,
     idConductor INT,
     idCliente INT NOT NULL,
-    FOREIGN KEY (idCliente) REFERENCES CLIENTE(idCliente),
+    FOREIGN KEY (idCliente) REFERENCES CLIENTE(idCliente) ON DELETE CASCADE,
+    FOREIGN KEY (idConductor) REFERENCES CONDUCTOR(idConductor) ON DELETE SET NULL,
     FOREIGN KEY (idSucursalOrigen) REFERENCES SUCURSAL(idSucursal),
-    FOREIGN KEY (idConductor) REFERENCES CONDUCTOR(idConductor),
     FOREIGN KEY (idEstatusEnvio) REFERENCES ESTATUS_ENVIO(idEstatusEnvio),
     FOREIGN KEY (destinatarioIdDireccion) REFERENCES DIRECCION(idDireccion)
 );
@@ -193,12 +193,12 @@ CREATE TABLE PAQUETE (
 CREATE TABLE ENVIO_HISTORIAL_ESTATUS (
     idHistorial INT PRIMARY KEY AUTO_INCREMENT,
     idEnvio INT NOT NULL,
-    idColaborador INT NOT NULL,
+    idColaborador INT,
     idEstatusEnvio INT NOT NULL,
     fechaHora TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     comentario TEXT DEFAULT NULL,
     FOREIGN KEY (idEnvio) REFERENCES ENVIO(idEnvio),
-    FOREIGN KEY (idColaborador) REFERENCES COLABORADOR(idColaborador),
+    FOREIGN KEY (idColaborador) REFERENCES COLABORADOR(idColaborador) ON DELETE SET NULL,
     FOREIGN KEY (idEstatusEnvio) REFERENCES ESTATUS_ENVIO(idEstatusEnvio)
 );
 
