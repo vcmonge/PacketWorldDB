@@ -27,7 +27,9 @@ INSERT INTO DIRECCION (calle, numero, idColonia) VALUES
   ('Campanario', '2', 300344),
   ('Palmas', '65', 60021),
   ('Boquerón', '105', 140051142),
-  ('Escobedo', '12', 90161027);
+  ('Escobedo', '12', 90161027),
+  ('Luna', '14', 90161027),
+  ('Rosa', '23', 320561);
 
 -- 2.4 Sucursales
 INSERT INTO SUCURSAL (codigo, nombre, idDireccion) VALUES
@@ -76,8 +78,8 @@ INSERT INTO ENVIO (
     idConductor,
     idCliente
 ) VALUES
-    ('GUIA-00002', 120.00, 'Roberto', 'Gómez', 'Bolaños', 5, 2, 1, 3, 1),
-    ('GUIA-00001', 50.00, 'Víctor', 'Monge', 'Morales', 6, 1, 1, 4, 1);
+    ('GUIA-00002', 120.00, 'Roberto', 'Gómez', 'Bolaños', 7, 2, 1, 3, 1),
+    ('GUIA-00001', 50.00, 'Víctor', 'Monge', 'Morales', 8, 1, 1, 4, 1);
 
 -- 2.12 Paquetes
 INSERT INTO PAQUETE (idEnvio, descripcion, peso, alto, ancho, profundidad) VALUES
