@@ -169,8 +169,8 @@ CREATE TABLE ENVIO (
     idEstatusEnvio INT NOT NULL,
     idSucursalOrigen INT NOT NULL,
     idConductor INT,
-    idCliente INT NOT NULL,
-    FOREIGN KEY (idCliente) REFERENCES CLIENTE(idCliente) ON DELETE CASCADE,
+    idCliente INT,
+    FOREIGN KEY (idCliente) REFERENCES CLIENTE(idCliente) ON DELETE SET NULL,
     FOREIGN KEY (idConductor) REFERENCES CONDUCTOR(idConductor) ON DELETE SET NULL,
     FOREIGN KEY (idSucursalOrigen) REFERENCES SUCURSAL(idSucursal),
     FOREIGN KEY (idEstatusEnvio) REFERENCES ESTATUS_ENVIO(idEstatusEnvio),
@@ -202,6 +202,31 @@ CREATE TABLE ENVIO_HISTORIAL_ESTATUS (
     FOREIGN KEY (idEstatusEnvio) REFERENCES ESTATUS_ENVIO(idEstatusEnvio)
 );
 
+-- ----------------------------------------------------------------------------
+-- 1.4 TRIGGERS
+-- ----------------------------------------------------------------------------
+
+DELIMITER //
+
+DROP TRIGGER IF EXISTS trg_eliminar_direccion_envio //
+CREATE TRIGGER trg_eliminar_direccion_envio
+    AFTER DELETE ON ENVIO
+    FOR EACH ROW
+BEGIN
+    DELETE FROM DIRECCION
+    WHERE idDireccion = OLD.destinatarioIdDireccion;
+END //
+
+DROP TRIGGER IF EXISTS trg_eliminar_direccion_cliente //
+CREATE TRIGGER trg_eliminar_direccion_cliente
+    AFTER DELETE ON CLIENTE
+    FOR EACH ROW
+BEGIN
+    DELETE FROM DIRECCION
+    WHERE idDireccion = OLD.idDireccion;
+END //
+
+DELIMITER ;
 
 -- ----------------------------------------------------------------------------
 -- USUARIOS Y PRIVILEGIOS
